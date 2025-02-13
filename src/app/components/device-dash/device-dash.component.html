@@ -1,0 +1,7 @@
+<div class="mixed-title">{{numTotal}} {{titleNumTotal}} {{numGood}} {{titleNumGood}} {{numBad}} {{titleNumBad}}</div>
+
+<div class="flex-container">
+  @for (device of devicesData; track device) {
+    <app-device-status [deviceData]="device"></app-device-status>
+  }
+</div>
