@@ -1,0 +1,44 @@
+<form [formGroup]="deviceForm" (ngSubmit)="onSubmit()" class="form-container">
+  <div class="form-column">
+    <mat-form-field>
+      <mat-label>תאריך התקנה</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="installDate" required readonly>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="deviceForm.get('installDate')?.hasError('required')">
+        יש לבחור תאריך התקנה
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Device ID</mat-label>
+      <input matInput formControlName="deviceId" required>
+      <mat-error *ngIf="deviceForm.get('deviceId')?.hasError('required')">
+        יש להזין זיהוי התקן
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-column">
+    <mat-form-field>
+      <mat-label>שם התקן</mat-label>
+      <mat-select formControlName="webSiteDeviceName" required>
+        @for (name of deviceNames; track name) {
+          <mat-option [value]="name">{{name}}</mat-option>
+        }
+      </mat-select>
+      <mat-error *ngIf="deviceForm.get('webSiteDeviceName')?.hasError('required')">
+        יש לבחור התקן
+      </mat-error>
+    </mat-form-field>
+
+    <div class="space-between">
+      <mat-checkbox formControlName="deviceOK">Device OK</mat-checkbox>
+
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </div>
+  </div>
+
+
+
+</form>

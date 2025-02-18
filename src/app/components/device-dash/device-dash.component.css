@@ -12,3 +12,38 @@
   font-size: 24px;
   color: black;
 }
+
+mat-form-field {
+  margin-top: 20px;
+}
+
+mat-mdc-button {
+  margin-bottom: 20px !important;
+}
+
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.mat-button, .mat-select {
+  height: 60px;
+  line-height: 60px;
+}
+
+.mat-button .mat-button-wrapper {
+  padding: 0 36px;
+}
+
+.mat-select .mat-select-trigger {
+  padding: 0 36px;
+}
+
+.custom-button {
+  height: 56px;
+  margin: 0px 5px 14px 0;
+}

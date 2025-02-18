@@ -12,6 +12,7 @@ export class OkIndecatorComponent {
   @Output() statusChanged=new EventEmitter();
 
   statusChangedClicked(){
+    this.deviceData.DeviceOK=this.deviceData.DeviceOK=='1'?'0':'1';
     this.statusChanged.emit({ Device: this.deviceData });
   }
 

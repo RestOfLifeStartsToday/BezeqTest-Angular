@@ -1,7 +1,48 @@
-<div class="mixed-title">{{numTotal}} {{titleNumTotal}} {{numGood}} {{titleNumGood}} {{numBad}} {{titleNumBad}}</div>
+<mat-toolbar color="primary">
+  <div class="mixed-title">{{titleNumTotal}}: {{numTotal}}. {{numGood}} {{titleNumGood}}, {{numBad}} {{titleNumBad}}</div>
+
+
+<div class="button-select-container">
+  <button mat-button
+            class="custom-button"
+            (click)="addDevice()">הוספת חיישן</button>
+
+
+    <mat-form-field>
+      <mat-label>סנן לפי התקן</mat-label>
+      <mat-select (selectionChange)="selectionHandler($event)">
+        <mat-option value="">כל ההתקנים</mat-option>
+        @for (name of deviceNames; track name) {
+          <mat-option [value]="name">{{name}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>עד תאריך עדכון</mat-label>
+      <input matInput [matDatepicker]="endPicker"
+        (dateChange)="onDateToChange($event)"
+        readonly>
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>החל מתאריך עדכון</mat-label>
+      <input matInput [matDatepicker]="startPicker"
+        (dateChange)="onDateFromChange($event)"
+        readonly>
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+
+</div>
+
+
+</mat-toolbar>
 
 <div class="flex-container">
-  @for (device of devicesData; track device) {
-    <app-device-status [deviceData]="device"></app-device-status>
+  @for (device of filteredDevicesData; track device) {
+    <app-device-status (deviceStatusChanged)="deviceStatusChangedHandler($event)" [deviceData]="device"></app-device-status>
   }
 </div>

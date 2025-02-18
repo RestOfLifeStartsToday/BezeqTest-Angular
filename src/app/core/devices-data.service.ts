@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, from, map } from 'rxjs';
+import { BehaviorSubject, Observable, from, map } from 'rxjs';
 import { DeviceData } from '../model/deviceData';
 import { IDeviceData } from '../model/IDeviceData';
 
@@ -9,9 +9,25 @@ import { IDeviceData } from '../model/IDeviceData';
 })
 export class DevicesDataService {
 
+  private dataSubject: BehaviorSubject<DeviceData[]> =
+                        new BehaviorSubject<DeviceData[]>([]);
+  data$: Observable<DeviceData[]> = this.dataSubject.asObservable();
+  private isDataLoaded = false;
+
+
   constructor() { }
 
+  loadData(): void {
+    if (!this.isDataLoaded) {
+      this.getDevices().subscribe(data => {
+        this.dataSubject.next(data);
+        this.isDataLoaded = true;
+      });
+    }
+  }
+
   getDevices(): Observable<DeviceData[]> {
+
     return from(fetch('assets/data/devices.json')
     .then(response => response.json() as Promise<IDeviceData[]>))
     .pipe(
@@ -28,5 +44,13 @@ export class DevicesDataService {
     );
   }
 
+  getData(): Observable<DeviceData[]> {
+    this.loadData();
+    return this.data$;
+  }
+
+  updateData(updatedData: DeviceData[]): void {
+    this.dataSubject.next(updatedData);
+  }
 
 }

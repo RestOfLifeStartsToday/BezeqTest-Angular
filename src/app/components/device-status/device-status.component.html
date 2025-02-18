@@ -3,8 +3,11 @@
     <mat-card-title-group>
       <!-- <mat-card-title>Shiba Inu</mat-card-title> -->
       <mat-card-subtitle>{{dataOfDevice.WebSiteDeviceName}}</mat-card-subtitle>
-      <mat-card-subtitle><app-ok-indecator [deviceData]="dataOfDevice"></app-ok-indecator></mat-card-subtitle>
-      <!-- https://material.angular.io/assets/img/examples/shiba2.jpg -->
+      <mat-card-subtitle>
+        <app-ok-indecator  [deviceData]="dataOfDevice"
+                          (statusChanged)="statusChangedHandler($event)">
+        </app-ok-indecator>
+      </mat-card-subtitle>
       <img mat-card-sm-image [src]="imgSrc" >
     </mat-card-title-group>
   </mat-card-header>

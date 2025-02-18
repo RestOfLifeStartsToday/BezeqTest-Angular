@@ -1,0 +1,25 @@
+/* device-form.component.css */
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-column {
+  flex: 1;
+  min-width: 200px;
+  margin: 16px;
+}
+
+mat-form-field, mat-checkbox {
+  width: 100%;
+}
+
+
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin: 0;
+}
+
